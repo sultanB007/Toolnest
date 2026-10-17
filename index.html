@@ -1,109 +1,360 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Free, simple online tools: image compressor, percentage calculator, age calculator and text tools.">
-<meta name="theme-color" content="#101827">
-<title>ToolNest — Free Online Tools</title>
+<title>ToolNest - Free Online Tools</title>
 <style>
-:root{--bg:#f4f7fb;--ink:#172033;--muted:#64748b;--card:#fff;--accent:#635bff;--line:#e5eaf2}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-header{background:#101827;color:white;padding:42px 18px 34px;text-align:center}
-header .tag{display:inline-block;background:#252f43;color:#c9d1ff;border:1px solid #3a4660;border-radius:999px;padding:5px 12px;font-size:13px}
-h1{font-size:clamp(32px,6vw,48px);line-height:1.1;margin:16px 0 10px}header p{color:#c4ccda;margin:0 auto;max-width:620px}
-main{max-width:1050px;margin:28px auto;padding:0 16px 48px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:21px;box-shadow:0 5px 22px #15213a0a}
-.card h2{font-size:19px;margin:0 0 5px}.desc{color:var(--muted);font-size:14px;margin:0 0 17px}
-label{display:block;font-weight:600;font-size:14px;margin:12px 0 6px}
-input,textarea,select{width:100%;padding:11px 12px;border:1px solid #d7deea;border-radius:10px;font:inherit;background:white;color:var(--ink)}
-textarea{min-height:90px;resize:vertical}
-button{border:0;border-radius:10px;background:var(--accent);color:white;padding:11px 15px;font:600 14px inherit;cursor:pointer;margin-top:12px}
-button.secondary{background:#eef0ff;color:#4038c9}button:hover{filter:brightness(.96)}
-.result{margin-top:12px;background:#f2f4ff;border-radius:10px;padding:11px;color:#29265f;min-height:42px;overflow-wrap:anywhere}
-.small{font-size:12px;color:var(--muted)}.file{padding:9px;background:#f8faff}
-footer{text-align:center;padding:22px;color:var(--muted);font-size:13px}
-.ad-note{margin:18px 0;background:#fff;border:1px dashed #c8cfdd;border-radius:12px;text-align:center;padding:14px;color:#7a8497;font-size:13px}
-a{color:var(--accent)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#090711;
+  color:#fff;
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+}
+header{
+  padding:20px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #29203e;
+  background:#100c1b;
+}
+.logo{font-size:27px;font-weight:bold;color:#b78aff}
+.logo span{color:white}
+nav a{color:#ddd;text-decoration:none;margin-left:20px}
+.hero{
+  text-align:center;
+  padding:85px 20px 55px;
+  background:radial-gradient(ellipse at top,#32145c,#090711 70%);
+}
+.hero h1{font-size:clamp(35px,6vw,60px);margin-bottom:18px}
+.hero h1 span{color:#b78aff}
+.hero p{color:#bcb3ca;font-size:17px;line-height:1.7}
+.btn{
+  display:inline-block;margin-top:25px;
+  padding:13px 25px;border:0;border-radius:10px;
+  background:linear-gradient(120deg,#a45cff,#6825c9);
+  color:white;text-decoration:none;font-weight:bold;cursor:pointer;
+}
+.container{max-width:1100px;margin:auto;padding:35px 20px}
+.section-title{text-align:center;margin-bottom:25px}
+.section-title h2{font-size:30px;margin-bottom:10px}
+.section-title p{color:#aaa}
+.search{
+  display:block;width:100%;max-width:500px;
+  margin:25px auto;padding:15px;
+  background:#171226;border:1px solid #49346b;
+  border-radius:10px;color:white;outline:none;
+}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{
+  background:linear-gradient(145deg,#1d1630,#110d1e);
+  border:1px solid #382653;border-radius:16px;
+  padding:25px;transition:.25s;
+}
+.card:hover{
+  transform:translateY(-6px);
+  border-color:#a45cff;
+  box-shadow:0 12px 35px #8c42ff25;
+}
+.icon{font-size:32px}
+.card h3{margin:15px 0 10px}
+.card p{color:#aaa;line-height:1.6;font-size:14px}
+.card button{margin-top:18px}
+.tool-area{
+  max-width:650px;margin:35px auto;
+  padding:25px;background:#171226;
+  border:1px solid #55357b;border-radius:16px;
+  display:none;
+}
+.tool-area h2{margin-bottom:20px;color:#c9a6ff}
+input,textarea{
+  width:100%;padding:13px;margin:10px 0;
+  background:#090711;color:white;
+  border:1px solid #49346b;border-radius:9px;
+}
+textarea{min-height:110px;resize:vertical}
+.tool-area button{
+  padding:12px 18px;background:#843ee5;
+  color:white;border:0;border-radius:8px;
+  cursor:pointer;margin:5px 3px;
+}
+.result{color:#bda0ff;margin-top:15px;overflow-wrap:anywhere}
+.close{float:right;background:#49346b!important}
+footer{
+  text-align:center;padding:30px;
+  border-top:1px solid #302340;color:#aaa;
+  margin-top:40px;
+}
+@media(max-width:750px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  header{padding:18px 5%}
+}
+@media(max-width:480px){
+  .grid{grid-template-columns:1fr}
+  nav a{margin-left:10px;font-size:13px}
+}
 </style>
 </head>
 <body>
+
 <header>
-  <span class="tag">FREE • SIMPLE • PRIVATE</span>
-  <h1>ToolNest</h1>
-  <p>Handy online tools for everyday tasks. No account needed — your files and text stay in your browser.</p>
+  <div class="logo">Tool<span>Nest.</span></div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#tools">Tools</a>
+    <a href="#about">About</a>
+  </nav>
 </header>
-<main>
-  <div class="ad-note">Helpful tools, all in one place. (Ad space can be added later after approval.)</div>
-  <section class="grid">
-    <article class="card">
-      <h2>🖼️ Image Compressor</h2><p class="desc">Reduce an image's file size in your browser.</p>
-      <label for="imgFile">Choose an image</label><input class="file" id="imgFile" type="file" accept="image/*">
-      <label for="quality">Compression quality: <span id="qLabel">70%</span></label><input id="quality" type="range" min="10" max="95" value="70">
-      <button id="compressBtn">Compress image</button><div class="result" id="imgResult" aria-live="polite">Your compressed image will appear here.</div>
-    </article>
-    <article class="card">
-      <h2>％ Percentage Calculator</h2><p class="desc">Find a percentage of any number.</p>
-      <label for="percent">Percentage (%)</label><input id="percent" type="number" placeholder="e.g. 15">
-      <label for="number">Number</label><input id="number" type="number" placeholder="e.g. 250">
-      <button id="percentBtn">Calculate</button><div class="result" id="percentResult" aria-live="polite">Your answer will appear here.</div>
-    </article>
-    <article class="card">
-      <h2>🎂 Age Calculator</h2><p class="desc">Calculate your age from a date of birth. The date is processed only on your device.</p>
-      <label for="birthDate">Date of birth</label><input id="birthDate" type="date">
-      <button id="ageBtn">Calculate age</button><div class="result" id="ageResult" aria-live="polite">Your age will appear here.</div>
-    </article>
-    <article class="card">
-      <h2>🔠 Text Case Converter</h2><p class="desc">Change text to uppercase, lowercase or title case.</p>
-      <label for="textInput">Your text</label><textarea id="textInput" placeholder="Type or paste your text here..."></textarea>
-      <button data-case="upper">UPPERCASE</button> <button class="secondary" data-case="lower">lowercase</button> <button class="secondary" data-case="title">Title Case</button>
-      <div class="result" id="textResult" aria-live="polite">Converted text will appear here.</div>
-    </article>
-    <article class="card">
-      <h2>📝 Word & Character Counter</h2><p class="desc">Count words, characters and spaces instantly.</p>
-      <label for="countText">Your text</label><textarea id="countText" placeholder="Start typing..."></textarea>
-      <div class="result" id="countResult" aria-live="polite">0 words • 0 characters</div>
-    </article>
-    <article class="card">
-      <h2>➗ Quick Division</h2><p class="desc">Divide one number by another.</p>
-      <label for="divA">First number</label><input id="divA" type="number" placeholder="e.g. 100">
-      <label for="divB">Divide by</label><input id="divB" type="number" placeholder="e.g. 4">
-      <button id="divideBtn">Calculate</button><div class="result" id="divideResult" aria-live="polite">Your answer will appear here.</div>
-    </article>
+
+<section class="hero" id="home">
+  <h1>Welcome to <span>ToolNest</span></h1>
+  <p>Your everyday tools, all in one place.<br>
+  Simple, fast and free online tools.</p>
+  <a href="#tools" class="btn">Explore Tools →</a>
+</section>
+
+<main class="container" id="tools">
+  <div class="section-title">
+    <h2>Explore Our Tools</h2>
+    <p>Choose your favourite tool and get started.</p>
+  </div>
+
+  <input class="search" id="search" placeholder="🔍 Search tools...">
+
+  <div class="grid" id="grid">
+
+    <div class="card" data-name="image compressor">
+      <div class="icon">🖼️</div>
+      <h3>Image Compressor</h3>
+      <p>Reduce image file size easily.</p>
+      <button class="btn" onclick="openTool('image')">Open Tool →</button>
+    </div>
+
+    <div class="card" data-name="percentage calculator">
+      <div class="icon">％</div>
+      <h3>Percentage Calculator</h3>
+      <p>Calculate percentages quickly.</p>
+      <button class="btn" onclick="openTool('percentage')">Open Tool →</button>
+    </div>
+
+    <div class="card" data-name="age calculator">
+      <div class="icon">🎂</div>
+      <h3>Age Calculator</h3>
+      <p>Calculate your age in seconds.</p>
+      <button class="btn" onclick="openTool('age')">Open Tool →</button>
+    </div>
+
+    <div class="card" data-name="text case converter">
+      <div class="icon">🔤</div>
+      <h3>Text Case Converter</h3>
+      <p>Convert text into different cases.</p>
+      <button class="btn" onclick="openTool('case')">Open Tool →</button>
+    </div>
+
+    <div class="card" data-name="word character counter">
+      <div class="icon">📝</div>
+      <h3>Word Counter</h3>
+      <p>Count words and characters.</p>
+      <button class="btn" onclick="openTool('counter')">Open Tool →</button>
+    </div>
+
+    <div class="card" data-name="quick division">
+      <div class="icon">➗</div>
+      <h3>Quick Division</h3>
+      <p>Divide numbers easily.</p>
+      <button class="btn" onclick="openTool('division')">Open Tool →</button>
+    </div>
+
+  </div>
+
+  <section class="tool-area" id="workspace">
+    <button class="close" onclick="closeTool()">✕ Close</button>
+    <h2 id="toolTitle">Tool</h2>
+    <div id="toolContent"></div>
+    <p class="result" id="result"></p>
   </section>
-  <p class="small" style="text-align:center;margin-top:22px">ToolNest is a free utility project. Calculations run locally in your browser. Don't upload private or sensitive files to websites you don't trust.</p>
 </main>
-<footer>© <span id="year"></span> ToolNest · <a href="mailto:hello@example.com">Contact</a> · Free tools for everyone</footer>
+
+<section class="container" id="about">
+  <div class="section-title">
+    <h2>About ToolNest</h2>
+    <p>ToolNest provides simple and useful online tools
+    to make your everyday tasks easier.</p>
+  </div>
+</section>
+
+<footer>
+  © 2026 ToolNest. All Rights Reserved.
+  <p style="margin-top:8px">Made with ❤️</p>
+</footer>
+
 <script>
-const $ = id => document.getElementById(id);
-$('year').textContent = new Date().getFullYear();
-$('quality').addEventListener('input', e => $('qLabel').textContent = e.target.value + '%');
-$('compressBtn').addEventListener('click', () => {
- const f=$('imgFile').files[0], box=$('imgResult');
- if(!f){box.textContent='Please choose an image first.';return;}
- if(!f.type.startsWith('image/')){box.textContent='Please select a valid image.';return;}
- const reader=new FileReader();
- reader.onload=ev=>{const img=new Image();img.onload=()=>{
-  const canvas=document.createElement('canvas');canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;
-  canvas.getContext('2d').drawImage(img,0,0);
-  const type=f.type==='image/png'?'image/png':'image/jpeg';
-  canvas.toBlob(blob=>{
-   if(!blob){box.textContent='Could not compress this image.';return;}
-   const url=URL.createObjectURL(blob), saved=Math.max(0,(1-blob.size/f.size)*100).toFixed(1);
-   box.innerHTML='';
-   const p=document.createElement('p');p.textContent=`Original: ${(f.size/1024).toFixed(1)} KB · New: ${(blob.size/1024).toFixed(1)} KB · Size change: ${saved}%`;
-   const a=document.createElement('a');a.href=url;a.download='toolnest-compressed.'+(type==='image/png'?'png':'jpg');a.textContent='Download compressed image';
-   box.append(p,a);
-  },type,Number($('quality').value)/100);
- };img.onerror=()=>box.textContent='Could not read this image.';img.src=ev.target.result;};
- reader.readAsDataURL(f);
+const workspace=document.getElementById('workspace');
+const content=document.getElementById('toolContent');
+const result=document.getElementById('result');
+
+function show(message){
+  result.textContent=message;
+}
+
+function openTool(type){
+  workspace.style.display='block';
+  result.textContent='';
+  content.innerHTML='';
+
+  const titles={
+    image:'Image Compressor',
+    percentage:'Percentage Calculator',
+    age:'Age Calculator',
+    case:'Text Case Converter',
+    counter:'Word & Character Counter',
+    division:'Quick Division'
+  };
+
+  document.getElementById('toolTitle').textContent=titles[type];
+
+  if(type==='percentage'){
+    content.innerHTML=`
+    <input id="p" type="number" placeholder="Percentage (%)">
+    <input id="n" type="number" placeholder="Enter number">
+    <button onclick="calcPercent()">Calculate</button>`;
+  }
+
+  if(type==='division'){
+    content.innerHTML=`
+    <input id="a" type="number" placeholder="First number">
+    <input id="b" type="number" placeholder="Second number">
+    <button onclick="divide()">Calculate</button>`;
+  }
+
+  if(type==='age'){
+    content.innerHTML=`
+    <input id="dob" type="date">
+    <button onclick="calcAge()">Calculate Age</button>`;
+    document.getElementById('dob').max=new Date().toISOString().split('T')[0];
+  }
+
+  if(type==='case'){
+    content.innerHTML=`
+    <textarea id="txt" placeholder="Enter your text"></textarea>
+    <button onclick="convert('upper')">UPPERCASE</button>
+    <button onclick="convert('lower')">lowercase</button>
+    <button onclick="convert('title')">Title Case</button>
+    <textarea id="output" placeholder="Result" readonly></textarea>
+    <button onclick="copyText()">Copy Text</button>`;
+  }
+
+  if(type==='counter'){
+    content.innerHTML=`
+    <textarea id="txt" placeholder="Write something..." oninput="countText()"></textarea>
+    <p id="counts">Words: 0 | Characters: 0</p>`;
+  }
+
+  if(type==='image'){
+    content.innerHTML=`
+    <input id="photo" type="file" accept="image/*">
+    <label>Quality</label>
+    <input id="quality" type="range" min="10" max="95" value="70">
+    <button onclick="compressImage()">Compress Image</button>
+    <a id="download" style="display:none;color:#c9a6ff">Download Compressed Image</a>`;
+  }
+
+  workspace.scrollIntoView({behavior:'smooth'});
+}
+
+function closeTool(){
+  workspace.style.display='none';
+}
+
+function calcPercent(){
+  let p=Number(document.getElementById('p').value);
+  let n=Number(document.getElementById('n').value);
+  if(document.getElementById('p').value===''||document.getElementById('n').value==='')return show('Enter both values.');
+  show(p+'% of '+n+' = '+(p*n/100));
+}
+
+function divide(){
+  let a=Number(document.getElementById('a').value);
+  let b=Number(document.getElementById('b').value);
+  if(document.getElementById('a').value===''||document.getElementById('b').value==='')return show('Enter both numbers.');
+  if(b===0)return show('Cannot divide by zero.');
+  show('Result: '+(a/b));
+}
+
+function calcAge(){
+  let value=document.getElementById('dob').value;
+  if(!value)return show('Please select your birth date.');
+  let dob=new Date(value+'T00:00:00');
+  let now=new Date();
+  if(dob>now)return show('Date cannot be in the future.');
+  let age=now.getFullYear()-dob.getFullYear();
+  let month=now.getMonth()-dob.getMonth();
+  if(month<0||(month===0&&now.getDate()<dob.getDate()))age--;
+  show('Your age is '+age+' years.');
+}
+
+function convert(type){
+  let text=document.getElementById('txt').value;
+  let output=document.getElementById('output');
+  if(type==='upper')output.value=text.toUpperCase();
+  if(type==='lower')output.value=text.toLowerCase();
+  if(type==='title')output.value=text.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());
+}
+
+async function copyText(){
+  let value=document.getElementById('output').value;
+  if(!value)return show('Nothing to copy.');
+  try{
+    await navigator.clipboard.writeText(value);
+    show('Text copied!');
+  }catch(e){show('Please select and copy the text manually.');}
+}
+
+function countText(){
+  let text=document.getElementById('txt').value;
+  let words=text.trim()?text.trim().split(/\s+/).length:0;
+  document.getElementById('counts').textContent=
+  'Words: '+words+' | Characters: '+text.length;
+}
+
+function compressImage(){
+  let file=document.getElementById('photo').files[0];
+  if(!file)return show('Please select an image.');
+  if(!file.type.startsWith('image/'))return show('Please select a valid image.');
+  let reader=new FileReader();
+  reader.onload=function(e){
+    let img=new Image();
+    img.onload=function(){
+      let canvas=document.createElement('canvas');
+      canvas.width=img.width;
+      canvas.height=img.height;
+      canvas.getContext('2d').drawImage(img,0,0);
+      canvas.toBlob(function(blob){
+        if(!blob)return show('Compression failed.');
+        let link=document.getElementById('download');
+        link.href=URL.createObjectURL(blob);
+        link.download='toolnest-compressed.jpg';
+        link.style.display='inline-block';
+        link.textContent='⬇ Download Compressed Image';
+        show('Original: '+Math.round(file.size/1024)+' KB | New: '+Math.round(blob.size/1024)+' KB');
+      },'image/jpeg',Number(document.getElementById('quality').value)/100);
+    };
+    img.onerror=()=>show('Unable to read image.');
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+document.getElementById('search').addEventListener('input',function(){
+  let query=this.value.toLowerCase();
+  document.querySelectorAll('.card').forEach(card=>{
+    card.style.display=card.dataset.name.includes(query)?'block':'none';
+  });
 });
-$('percentBtn').addEventListener('click',()=>{const p=Number($('percent').value),n=Number($('number').value);$('percentResult').textContent=($('percent').value===''||$('number').value==='')?'Enter both numbers.':`${p}% of ${n} = ${(p/100*n).toLocaleString()}`;});
-$('ageBtn').addEventListener('click',()=>{const v=$('birthDate').value,r=$('ageResult');if(!v){r.textContent='Choose your date of birth.';return;}const b=new Date(v+'T00:00:00'),t=new Date();if(b>t){r.textContent='Date must not be in the future.';return;}let y=t.getFullYear()-b.getFullYear(),m=t.getMonth()-b.getMonth(),d=t.getDate()-b.getDate();if(d<0){m--;d+=new Date(t.getFullYear(),t.getMonth(),0).getDate();}if(m<0){y--;m+=12;}r.textContent=`${y} years, ${m} months and ${d} days`;});
-document.querySelectorAll('[data-case]').forEach(btn=>btn.addEventListener('click',()=>{const s=$('textInput').value;let v=s;if(btn.dataset.case==='upper')v=s.toUpperCase();if(btn.dataset.case==='lower')v=s.toLowerCase();if(btn.dataset.case==='title')v=s.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());$('textResult').textContent=v||'Enter some text first.';}));
-$('countText').addEventListener('input',()=>{const s=$('countText').value;const words=s.trim()?s.trim().split(/\s+/).length:0;$('countResult').textContent=`${words} words · ${s.length} characters (including spaces)`;});
-$('divideBtn').addEventListener('click',()=>{const a=$('divA').value,b=$('divB').value,r=$('divideResult');if(a===''||b===''){r.textContent='Enter both numbers.';return;}if(Number(b)===0){r.textContent='Cannot divide by zero.';return;}r.textContent=`Answer: ${Number(a)/Number(b)}`;});
 </script>
 </body>
-</html>
+  </html>
+                                                                        
