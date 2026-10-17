@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Free, simple online tools: image compressor, percentage calculator, age calculator and text tools.">
+<meta name="theme-color" content="#101827">
+<title>ToolNest — Free Online Tools</title>
+<style>
+:root{--bg:#f4f7fb;--ink:#172033;--muted:#64748b;--card:#fff;--accent:#635bff;--line:#e5eaf2}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{background:#101827;color:white;padding:42px 18px 34px;text-align:center}
+header .tag{display:inline-block;background:#252f43;color:#c9d1ff;border:1px solid #3a4660;border-radius:999px;padding:5px 12px;font-size:13px}
+h1{font-size:clamp(32px,6vw,48px);line-height:1.1;margin:16px 0 10px}header p{color:#c4ccda;margin:0 auto;max-width:620px}
+main{max-width:1050px;margin:28px auto;padding:0 16px 48px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:21px;box-shadow:0 5px 22px #15213a0a}
+.card h2{font-size:19px;margin:0 0 5px}.desc{color:var(--muted);font-size:14px;margin:0 0 17px}
+label{display:block;font-weight:600;font-size:14px;margin:12px 0 6px}
+input,textarea,select{width:100%;padding:11px 12px;border:1px solid #d7deea;border-radius:10px;font:inherit;background:white;color:var(--ink)}
+textarea{min-height:90px;resize:vertical}
+button{border:0;border-radius:10px;background:var(--accent);color:white;padding:11px 15px;font:600 14px inherit;cursor:pointer;margin-top:12px}
+button.secondary{background:#eef0ff;color:#4038c9}button:hover{filter:brightness(.96)}
+.result{margin-top:12px;background:#f2f4ff;border-radius:10px;padding:11px;color:#29265f;min-height:42px;overflow-wrap:anywhere}
+.small{font-size:12px;color:var(--muted)}.file{padding:9px;background:#f8faff}
+footer{text-align:center;padding:22px;color:var(--muted);font-size:13px}
+.ad-note{margin:18px 0;background:#fff;border:1px dashed #c8cfdd;border-radius:12px;text-align:center;padding:14px;color:#7a8497;font-size:13px}
+a{color:var(--accent)}
+</style>
+</head>
+<body>
+<header>
+  <span class="tag">FREE • SIMPLE • PRIVATE</span>
+  <h1>ToolNest</h1>
+  <p>Handy online tools for everyday tasks. No account needed — your files and text stay in your browser.</p>
+</header>
+<main>
+  <div class="ad-note">Helpful tools, all in one place. (Ad space can be added later after approval.)</div>
+  <section class="grid">
+    <article class="card">
+      <h2>🖼️ Image Compressor</h2><p class="desc">Reduce an image's file size in your browser.</p>
+      <label for="imgFile">Choose an image</label><input class="file" id="imgFile" type="file" accept="image/*">
+      <label for="quality">Compression quality: <span id="qLabel">70%</span></label><input id="quality" type="range" min="10" max="95" value="70">
+      <button id="compressBtn">Compress image</button><div class="result" id="imgResult" aria-live="polite">Your compressed image will appear here.</div>
+    </article>
+    <article class="card">
+      <h2>％ Percentage Calculator</h2><p class="desc">Find a percentage of any number.</p>
+      <label for="percent">Percentage (%)</label><input id="percent" type="number" placeholder="e.g. 15">
+      <label for="number">Number</label><input id="number" type="number" placeholder="e.g. 250">
+      <button id="percentBtn">Calculate</button><div class="result" id="percentResult" aria-live="polite">Your answer will appear here.</div>
+    </article>
+    <article class="card">
+      <h2>🎂 Age Calculator</h2><p class="desc">Calculate your age from a date of birth. The date is processed only on your device.</p>
+      <label for="birthDate">Date of birth</label><input id="birthDate" type="date">
+      <button id="ageBtn">Calculate age</button><div class="result" id="ageResult" aria-live="polite">Your age will appear here.</div>
+    </article>
+    <article class="card">
+      <h2>🔠 Text Case Converter</h2><p class="desc">Change text to uppercase, lowercase or title case.</p>
+      <label for="textInput">Your text</label><textarea id="textInput" placeholder="Type or paste your text here..."></textarea>
+      <button data-case="upper">UPPERCASE</button> <button class="secondary" data-case="lower">lowercase</button> <button class="secondary" data-case="title">Title Case</button>
+      <div class="result" id="textResult" aria-live="polite">Converted text will appear here.</div>
+    </article>
+    <article class="card">
+      <h2>📝 Word & Character Counter</h2><p class="desc">Count words, characters and spaces instantly.</p>
+      <label for="countText">Your text</label><textarea id="countText" placeholder="Start typing..."></textarea>
+      <div class="result" id="countResult" aria-live="polite">0 words • 0 characters</div>
+    </article>
+    <article class="card">
+      <h2>➗ Quick Division</h2><p class="desc">Divide one number by another.</p>
+      <label for="divA">First number</label><input id="divA" type="number" placeholder="e.g. 100">
+      <label for="divB">Divide by</label><input id="divB" type="number" placeholder="e.g. 4">
+      <button id="divideBtn">Calculate</button><div class="result" id="divideResult" aria-live="polite">Your answer will appear here.</div>
+    </article>
+  </section>
+  <p class="small" style="text-align:center;margin-top:22px">ToolNest is a free utility project. Calculations run locally in your browser. Don't upload private or sensitive files to websites you don't trust.</p>
+</main>
+<footer>© <span id="year"></span> ToolNest · <a href="mailto:hello@example.com">Contact</a> · Free tools for everyone</footer>
+<script>
+const $ = id => document.getElementById(id);
+$('year').textContent = new Date().getFullYear();
+$('quality').addEventListener('input', e => $('qLabel').textContent = e.target.value + '%');
+$('compressBtn').addEventListener('click', () => {
+ const f=$('imgFile').files[0], box=$('imgResult');
+ if(!f){box.textContent='Please choose an image first.';return;}
+ if(!f.type.startsWith('image/')){box.textContent='Please select a valid image.';return;}
+ const reader=new FileReader();
+ reader.onload=ev=>{const img=new Image();img.onload=()=>{
+  const canvas=document.createElement('canvas');canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;
+  canvas.getContext('2d').drawImage(img,0,0);
+  const type=f.type==='image/png'?'image/png':'image/jpeg';
+  canvas.toBlob(blob=>{
+   if(!blob){box.textContent='Could not compress this image.';return;}
+   const url=URL.createObjectURL(blob), saved=Math.max(0,(1-blob.size/f.size)*100).toFixed(1);
+   box.innerHTML='';
+   const p=document.createElement('p');p.textContent=`Original: ${(f.size/1024).toFixed(1)} KB · New: ${(blob.size/1024).toFixed(1)} KB · Size change: ${saved}%`;
+   const a=document.createElement('a');a.href=url;a.download='toolnest-compressed.'+(type==='image/png'?'png':'jpg');a.textContent='Download compressed image';
+   box.append(p,a);
+  },type,Number($('quality').value)/100);
+ };img.onerror=()=>box.textContent='Could not read this image.';img.src=ev.target.result;};
+ reader.readAsDataURL(f);
+});
+$('percentBtn').addEventListener('click',()=>{const p=Number($('percent').value),n=Number($('number').value);$('percentResult').textContent=($('percent').value===''||$('number').value==='')?'Enter both numbers.':`${p}% of ${n} = ${(p/100*n).toLocaleString()}`;});
+$('ageBtn').addEventListener('click',()=>{const v=$('birthDate').value,r=$('ageResult');if(!v){r.textContent='Choose your date of birth.';return;}const b=new Date(v+'T00:00:00'),t=new Date();if(b>t){r.textContent='Date must not be in the future.';return;}let y=t.getFullYear()-b.getFullYear(),m=t.getMonth()-b.getMonth(),d=t.getDate()-b.getDate();if(d<0){m--;d+=new Date(t.getFullYear(),t.getMonth(),0).getDate();}if(m<0){y--;m+=12;}r.textContent=`${y} years, ${m} months and ${d} days`;});
+document.querySelectorAll('[data-case]').forEach(btn=>btn.addEventListener('click',()=>{const s=$('textInput').value;let v=s;if(btn.dataset.case==='upper')v=s.toUpperCase();if(btn.dataset.case==='lower')v=s.toLowerCase();if(btn.dataset.case==='title')v=s.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());$('textResult').textContent=v||'Enter some text first.';}));
+$('countText').addEventListener('input',()=>{const s=$('countText').value;const words=s.trim()?s.trim().split(/\s+/).length:0;$('countResult').textContent=`${words} words · ${s.length} characters (including spaces)`;});
+$('divideBtn').addEventListener('click',()=>{const a=$('divA').value,b=$('divB').value,r=$('divideResult');if(a===''||b===''){r.textContent='Enter both numbers.';return;}if(Number(b)===0){r.textContent='Cannot divide by zero.';return;}r.textContent=`Answer: ${Number(a)/Number(b)}`;});
+</script>
+</body>
+</html>
